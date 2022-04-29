@@ -10,4 +10,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <exec.mainClass>com.mycompany.mycompany.MyCompany</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.46</version>
+        </dependency>
+      
+    </dependencies>
+
 </project>

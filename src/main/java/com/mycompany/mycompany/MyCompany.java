@@ -7,18 +7,28 @@ package com.mycompany.mycompany;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 
 /**
  *
  * @author LG
  */
 public class MyCompany extends javax.swing.JFrame {
+    public static MyCompany _Mcinstance;
+    public static KdhDBManager _instance;
 
     /**
      * Creates new form MyCompany
      */
     public MyCompany() {
         initComponents();
+        _Mcinstance = this;
+        _instance = MySqlDBManager.getInstance();
+
+        ArrayList<String[]> al = _instance.executeQueries("select id, userid, passwd, nickname from member", 4);
+        for (String[] values : al) {
+            System.out.println(values[0] + ", " + values[1] + ", " + values[2] + ", " + values[3]);
+        }
 //        this.setVisible(true);
 //        initScreen();
     }
@@ -104,14 +114,14 @@ public class MyCompany extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ComponentHidden
 
     private void jNewMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNewMnuActionPerformed
-    
+
         NewMemberFrm newMemberFrm = new NewMemberFrm();
         jDeskTopPnl.add(newMemberFrm);
         newMemberFrm.setVisible(true);
     }//GEN-LAST:event_jNewMnuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
         initScreen();
     }//GEN-LAST:event_formWindowOpened
 
@@ -161,16 +171,16 @@ public class MyCompany extends javax.swing.JFrame {
 
     private void initScreen() {
         LoginDiG obj = new LoginDiG(this, true);
-        obj.addWindowListener(new WindowAdapter(){
+        obj.addWindowListener(new WindowAdapter() {
             @Override
-            public void windowClosed(WindowEvent e){
-                if(obj.isLoginSuccess){
+            public void windowClosed(WindowEvent e) {
+                if (obj.isLoginSuccess) {
                     System.out.println("로그인 성공");
-                }else{
+                } else {
                     System.exit(-1);
                 }
             }
-            
+
         });
         obj.setVisible(true);
     }

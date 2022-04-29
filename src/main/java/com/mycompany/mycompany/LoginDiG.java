@@ -4,12 +4,15 @@
  */
 package com.mycompany.mycompany;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LG
  */
 public class LoginDiG extends javax.swing.JDialog {
-
+    KdhDBManager _instance;
     /**
      * Creates new form LoginDiG
      */
@@ -17,6 +20,8 @@ public class LoginDiG extends javax.swing.JDialog {
     public LoginDiG(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        _instance = MyCompany._instance;
+        _instance.executeQueries("select id, userid, passwd, nickname from member", 4, jMemberCmd, 1, 3);
     }
 
     /**
@@ -29,9 +34,9 @@ public class LoginDiG extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jMemberCmd = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswdPwd = new javax.swing.JPasswordField();
         jLoginBtn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -40,12 +45,12 @@ public class LoginDiG extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel1.setText("아이디");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jMemberCmd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel2.setText("열쇠글");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswdPwd.setText("jPasswordField1");
 
         jLoginBtn.setText("로그인");
         jLoginBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -70,11 +75,11 @@ public class LoginDiG extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jPasswordField1))
+                        .addComponent(jPasswdPwd))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jMemberCmd, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -83,11 +88,11 @@ public class LoginDiG extends javax.swing.JDialog {
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jMemberCmd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswdPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLoginBtn)
@@ -100,6 +105,22 @@ public class LoginDiG extends javax.swing.JDialog {
 
     private void jLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginBtnActionPerformed
         // TODO add your handling code here:
+        String userid = ((KeyValues)this.jMemberCmd.getSelectedItem()).getKeyValue();
+        String passwd = String.valueOf(this.jPasswdPwd.getPassword());
+        String sql = "select id, userid, passwd, nickname from member "
+                + " where userid='"+userid+"' and passwd = '"+passwd+"'";
+        System.out.println(sql);
+        ArrayList<String []> al = _instance.executeQueries(sql, 4);
+        if(al.size()<1){
+            System.out.println("No Member, Try Again!!!");
+            JOptionPane.showMessageDialog(MyCompany._Mcinstance,
+                    "일치하는 자료가 없습니다.",
+                    "로그인 오류", JOptionPane.ERROR_MESSAGE);
+                    
+            return;
+        }
+        
+        
         isLoginSuccess = true;
         dispose();
     }//GEN-LAST:event_jLoginBtnActionPerformed
@@ -148,10 +169,10 @@ public class LoginDiG extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton jLoginBtn;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JComboBox<String> jMemberCmd;
+    private javax.swing.JPasswordField jPasswdPwd;
     // End of variables declaration//GEN-END:variables
 }

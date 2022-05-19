@@ -122,7 +122,7 @@ public class MyCompany extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-        initScreen();
+//        initScreen();
     }//GEN-LAST:event_formWindowOpened
 
     /**

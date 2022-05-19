@@ -21,7 +21,7 @@ public class LoginDiG extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         _instance = MyCompany._instance;
-        _instance.executeQueries("select id, userid, passwd, nickname from member", 4, jMemberCmd, 1, 3);
+        _instance.executeQueries("select id, userid, passwd, nickname from member", jMemberCmd, 3);
     }
 
     /**
@@ -105,7 +105,7 @@ public class LoginDiG extends javax.swing.JDialog {
 
     private void jLoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginBtnActionPerformed
         // TODO add your handling code here:
-        String userid = ((KeyValues)this.jMemberCmd.getSelectedItem()).getKeyValue();
+        String userid = ((KeyValues)this.jMemberCmd.getSelectedItem()).getValues()[1];
         String passwd = String.valueOf(this.jPasswdPwd.getPassword());
         String sql = "select id, userid, passwd, nickname from member "
                 + " where userid='"+userid+"' and passwd = '"+passwd+"'";

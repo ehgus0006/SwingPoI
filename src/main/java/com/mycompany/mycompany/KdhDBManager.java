@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -74,23 +76,74 @@ public abstract class KdhDBManager {
         return al;
     }
 
-    public void executeQueries(String sql, int count, JComboBox combo, int keyIndex, int viewIndex) {
+    public void executeQueries(String sql, JComboBox combo, int viewIndex) {
         Statement stmt = null;
         try {
             combo.removeAllItems();
             stmt = _con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
+            int count = rs.getMetaData().getColumnCount();
+
             while (rs.next()) {
                 String[] values = new String[count];
                 for (int i = 0; i < count; i++) {
                     values[i] = rs.getString(i + 1);
                 }
-                KeyValues obj = new KeyValues(values, keyIndex, viewIndex);
+                KeyValues obj = new KeyValues(values, viewIndex);
                 combo.addItem(obj);
             }
         } catch (Exception e) {
 
         } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    void executeQueries(String sql, JTable jTableTbl) {
+        System.out.println("들어옴");
+        Statement stmt = null;
+        try {
+            DefaultTableModel tableModel = (DefaultTableModel)jTableTbl.getModel();
+            tableModel.setRowCount(0);
+            
+            stmt = _con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            
+            int count = rs.getMetaData().getColumnCount();
+            System.out.println("colume Count" + count);
+                    
+            while (rs.next()) {
+                String[] values = new String[count];
+                for (int i = 0; i < count; i++) {
+                    values[i] = rs.getString(i + 1);
+                   
+                    System.out.println("value[i] 는"+values[i]);
+                }
+                
+                tableModel.addRow(values);
+            }
+        } catch (Exception e) {
+
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    void execute(String sql) {
+        Statement stmt = null;
+        try {
+              stmt = _con.createStatement();
+              stmt.execute(sql);
+
+        } catch (Exception e) {
+        }finally {
             try {
                 stmt.close();
             } catch (Exception e) {

@@ -9,8 +9,7 @@ package com.mycompany.mycompany;
  * @author LG
  */
 public class KeyValues {
-    String[] values;
-    int keyIndex;
+    String[] values;    
     int viewIndex;
 
     @Override
@@ -20,9 +19,8 @@ public class KeyValues {
     
     
 
-    public KeyValues(String[] values, int keyIndex, int viewIndex) {
+    public KeyValues(String[] values, int viewIndex) {
         this.values = values;
-        this.keyIndex = keyIndex;
         this.viewIndex = viewIndex;
     }
     
@@ -36,17 +34,6 @@ public class KeyValues {
         this.values = values;
     }
 
-    public int getKeyIndex() {
-        return keyIndex;
-    }
-    
-    public String getKeyValue() {
-        return this.values[keyIndex];
-    }
-
-    public void setKeyIndex(int keyIndex) {
-        this.keyIndex = keyIndex;
-    }
 
     public int getViewIndex() {
         return viewIndex;

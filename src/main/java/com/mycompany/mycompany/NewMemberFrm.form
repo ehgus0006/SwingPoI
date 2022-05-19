@@ -39,7 +39,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="252" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="248" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -51,15 +51,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jUpdateBtn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPrintBtn" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
@@ -90,11 +85,33 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jFeMale" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jSelectBtn" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel4" min="-2" pref="72" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jPasswordTxt" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jSelectBtn" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jAccountTxt" min="-2" pref="120" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Component id="jSaveBtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jUpdateBtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jPrintBtn" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="666" max="32767" attributes="0"/>
+                  <EmptySpace pref="588" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -102,22 +119,33 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Group type="102" alignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jMno" min="-2" max="-2" attributes="0"/>
+                      <Component id="jAccountTxt" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="jMno" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Group type="102" alignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jName" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSelectBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jName" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jPasswordTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="jSelectBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="jTeamPnb" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -130,6 +158,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jUpdateBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jPrintBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSaveBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
@@ -183,17 +212,20 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="jSelectBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#xac80;&#xc0c9;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSelectBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jUpdateBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#xc218;&#xc815;"/>
+            <Property name="text" type="java.lang.String" value="&#xc800;&#xc7a5;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jUpdateBtnActionPerformed"/>
@@ -203,6 +235,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#xc778;&#xc1c4;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPrintBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jUnMarried">
           <Properties>
@@ -242,6 +277,40 @@
             <Property name="text" type="java.lang.String" value="&#xc5ec;"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="jLabel4">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#xacc4;&#xc815;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jAccountTxt">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jTextField1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jPasswordTxt">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jTextField1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="18" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#xbe44;&#xbc88;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jSaveBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#xc2e0;&#xaddc;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jSaveBtnActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -254,7 +323,7 @@
         <Component class="javax.swing.JTable" name="jTableTbl">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="6">
+              <Table columnCount="7" rowCount="6">
                 <Column editable="false" title="&#xc0ac;&#xc6d0;&#xbc88;&#xd638;" type="java.lang.String">
                   <Data value="1001"/>
                   <Data value="1002"/>
@@ -263,7 +332,9 @@
                   <Data value="null"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="&#xc774;&#xb984;" type="java.lang.String">
+                <Column editable="false" title="&#xacc4;&#xc815;" type="java.lang.String"/>
+                <Column editable="false" title="&#xbe44;&#xbc88;" type="java.lang.String"/>
+                <Column editable="false" title="&#xc774;&#xb984;" type="java.lang.String">
                   <Data value="&#xae40;&#xb3c4;&#xd604;"/>
                   <Data value="&#xc11c;&#xd604;&#xad50;"/>
                   <Data value="&#xc774;&#xc815;&#xc7ac;"/>
@@ -271,7 +342,7 @@
                   <Data value="null"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="&#xc18c;&#xc18d;&#xbd80;&#xc11c;" type="java.lang.String">
+                <Column editable="false" title="&#xc18c;&#xc18d;&#xbd80;&#xc11c;" type="java.lang.String">
                   <Data value="&#xcd1d;&#xbb34;&#xd300;"/>
                   <Data value="&#xc0ac;&#xbb34;&#xd300;"/>
                   <Data value="&#xac1c;&#xbc1c;&#xd300;"/>
@@ -279,8 +350,7 @@
                   <Data value="null"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="&#xbe44;&#xace0;" type="java.lang.String"/>
-                <Column editable="true" title="&#xacb0;&#xd63c;&#xc5ec;&#xbd80;" type="java.lang.String">
+                <Column editable="false" title="&#xacb0;&#xd63c;&#xc5ec;&#xbd80;" type="java.lang.String">
                   <Data value="&#xae30;&#xd63c;"/>
                   <Data value="&#xbbf8;&#xd63c;"/>
                   <Data value="&#xae30;&#xd63c;"/>
@@ -288,7 +358,7 @@
                   <Data value="null"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="&#xc131;&#xbcc4;" type="java.lang.String">
+                <Column editable="false" title="&#xc131;&#xbcc4;" type="java.lang.String">
                   <Data value="&#xb0a8;"/>
                   <Data value="&#xb0a8;"/>
                   <Data value="&#xb0a8;"/>

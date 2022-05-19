@@ -1,23 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package com.mycompany.mycompany;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author LG
  */
 public class NewMemberFrm extends javax.swing.JInternalFrame {
+    KdhDBManager _instance;
 
     /**
      * Creates new form NewMemberFrm
      */
     public NewMemberFrm() {
+        _instance = MyCompany._instance;
         initComponents();
         initScreen();
     }
@@ -39,7 +44,7 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTeamPnb = new javax.swing.JComboBox<>();
+        jTeamPnb = new javax.swing.JComboBox();
         jSelectBtn = new javax.swing.JButton();
         jUpdateBtn = new javax.swing.JButton();
         jPrintBtn = new javax.swing.JButton();
@@ -47,6 +52,11 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
         jMarried = new javax.swing.JRadioButton();
         jMale = new javax.swing.JRadioButton();
         jFeMale = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        jAccountTxt = new javax.swing.JTextField();
+        jPasswordTxt = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jSaveBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTbl = new javax.swing.JTable();
 
@@ -67,11 +77,16 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel3.setText("소속 부서");
 
-        jTeamPnb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "총무팀", "인사팀", "개발팀", "사무팀" }));
+        jTeamPnb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "총무팀", "인사팀", "개발팀", "사무팀" }));
 
         jSelectBtn.setText("검색");
+        jSelectBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSelectBtnActionPerformed(evt);
+            }
+        });
 
-        jUpdateBtn.setText("수정");
+        jUpdateBtn.setText("저장");
         jUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jUpdateBtnActionPerformed(evt);
@@ -79,6 +94,11 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
         });
 
         jPrintBtn.setText("인쇄");
+        jPrintBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPrintBtnActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jUnMarried);
         jUnMarried.setText("미혼");
@@ -102,18 +122,31 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
         buttonGroup2.add(jFeMale);
         jFeMale.setText("여");
 
+        jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        jLabel4.setText("계정");
+
+        jAccountTxt.setText("jTextField1");
+
+        jPasswordTxt.setText("jTextField1");
+
+        jLabel5.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        jLabel5.setText("비번");
+
+        jSaveBtn.setText("신규");
+        jSaveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSaveBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jUpdateBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPrintBtn))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -138,24 +171,49 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
                                 .addComponent(jMale)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFeMale))
-                            .addComponent(jSelectBtn))))
-                .addContainerGap(666, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jSelectBtn))
+                                    .addComponent(jAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jSaveBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jUpdateBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPrintBtn)))
+                .addContainerGap(588, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jMno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jMno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSelectBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jPasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSelectBtn))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,28 +225,29 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jUpdateBtn)
-                    .addComponent(jPrintBtn))
+                    .addComponent(jPrintBtn)
+                    .addComponent(jSaveBtn))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jTableTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1001", "김도현", "총무팀", null, "기혼", "남"},
-                {"1002", "서현교", "사무팀", null, "미혼", "남"},
-                {"1003", "이정재", "개발팀", null, "기혼", "남"},
-                {"1004", "우수진", "인사팀", null, "미혼", "여"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {"1001", null, null, "김도현", "총무팀", "기혼", "남"},
+                {"1002", null, null, "서현교", "사무팀", "미혼", "남"},
+                {"1003", null, null, "이정재", "개발팀", "기혼", "남"},
+                {"1004", null, null, "우수진", "인사팀", "미혼", "여"},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "사원번호", "이름", "소속부서", "비고", "결혼여부", "성별"
+                "사원번호", "계정", "비번", "이름", "소속부서", "결혼여부", "성별"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -218,7 +277,7 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                 .addGap(57, 57, 57))
         );
 
@@ -234,11 +293,23 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
                 ((DefaultTableModel)jTableTbl.getModel()).getDataVector().elementAt(selectedRow);
         
         this.jMno.setText((String)vt.get(0));
-        this.jName.setText((String)vt.get(1));
-        this.jTeamPnb.getModel().setSelectedItem((String)vt.get(2));
+        this.jAccountTxt.setText((String)vt.get(1));
+        this.jPasswordTxt.setText((String)vt.get(2));
+        this.jName.setText((String)vt.get(3));
+//        this.jTeamPnb.getModel().setSelectedItem((String)vt.get(4));
+        int count = jTeamPnb.getItemCount();
+        String depart = (String)vt.get(4);
         
-        String married = (String)vt.get(4);
-        String gender = (String)vt.get(5);
+        for(int i=0; i < count; i++){
+            KeyValues obj = (KeyValues)jTeamPnb.getItemAt(i);
+            if(obj.getValues()[2].compareTo(depart) ==0 ){
+                jTeamPnb.getModel().setSelectedItem(obj);
+                return;
+            }
+        }
+        
+        String married = (String)vt.get(5);
+        String gender = (String)vt.get(6);
         if(married.compareTo("기혼")==0){
             jMarried.setSelected(true);
         }
@@ -257,37 +328,61 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
 
     private void jUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateBtnActionPerformed
         int selectedRow = jTableTbl.getSelectedRow();
-        if(selectedRow < 0){
-            return;
-        }
+//        if(selectedRow < 0){
+//            return;
+//        }
         
         String idNum = this.jMno.getText();
         String name = this.jName.getText();
-        String team = (String)this.jTeamPnb.getSelectedItem();
-        String married = "기혼";
-        String gender = "남";
-        resultModel.setValueAt(idNum, selectedRow, 0);
-        resultModel.setValueAt(name, selectedRow, 1);
-        resultModel.setValueAt(team, selectedRow, 2);
+//        String team = (String)this.jTeamPnb.getModel().getSelectedItem();
+        
+        KeyValues team = (KeyValues)this.jTeamPnb.getSelectedItem();
+        
+        String married = "y";
+      
         
         if(jMarried.isSelected()){
-            married = "기혼";
+            married = "y";
         }
         else{
-            married = "미혼";
+            married = "n";
         }
-        if(jMale.isSelected()){
-            gender = "남";
-        }
-        else{
-            gender = "여";
-        }
-        resultModel.setValueAt(married, selectedRow, 4);
-        resultModel.setValueAt(gender, selectedRow, 5);
+        String gender = "1";
 
+        if(jMale.isSelected()){
+            gender = "1";
+        }
+        if(jFeMale.isSelected()){
+            gender = "2";
+        }
+        String sql = "";
+        if(selectedRow < 0){
+             sql = "insert member(userid, passwd, nickname, depart, ismarried, gender) values("
+                 + "'" + this.jAccountTxt.getText() + "'"
+                 + ",'" + this.jPasswordTxt.getText() + "'"
+                 + ",'" + this.jName.getText() + "'"
+                 + ",'" + team.getValues()[1] + "'"
+                 + ",'" + married + "'"
+                 + ",'" + gender + "')";
+                 
+             System.out.println(sql);
+
+        }else{
+        sql = "UPDATE member set "
+                + " userid = '" + this.jAccountTxt.getText() + "',"
+                + " passwd = '" + this.jPasswordTxt.getText() + "',"
+                + " nickname = '" + this.jName.getText() + "',"
+                + " depart = '" + team.getValues()[1] + "',"
+                + " ismarried = '" + married + "',"
+                + " gender = '" + gender + "' "
+                + " where id=" + idNum;
         
-        
-       
+            System.out.println(sql);
+         
+        }
+            this._instance.execute(sql);
+            this.jSelectBtn.doClick();
+    
 
     }//GEN-LAST:event_jUpdateBtnActionPerformed
 
@@ -298,25 +393,99 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
     private void jMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMaleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMaleActionPerformed
+
+    private void jSelectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSelectBtnActionPerformed
+        String sql = "select a.id, userid, passwd, nickname, "
+                + " ifnull(b.name, '미배치'),"
+                + " case when ismarried='y' then '예' else '아니오' end, "
+                + " case when gender=1 || gender=3 then '남자' else '여자' end "
+                + " from member a"
+                + " left join depart b"
+                + " on a.depart=b.code"
+                + " where 1=1";
+        
+//        String sql = "select id, userid, passwd, nickname, depart,"
+//                + "case when ismarried='y' then '예' else '아니오' end, "
+//                + "case when gender=1 || gender=3 then '남자' else '여자' end "
+//                + "from member";
+        
+         
+        this._instance.executeQueries(sql, this.jTableTbl);
+        
+    }//GEN-LAST:event_jSelectBtnActionPerformed
+
+    private void jPrintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPrintBtnActionPerformed
+        // TODO add your handling code here:
+        System.out.println("누름");
+        String filePath = "member1.xlsx"; // 저장할 파일 경로
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(filePath);
+           
+        
+        
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("studentList");    // sheet 생성
+        
+        XSSFRow curRow;
+        
+        int rowCount = this.jTableTbl.getModel().getRowCount();    // 테이블 줄 크기 
+        for (int i = 0; i < rowCount; i++) {
+            
+            Vector vt = (Vector)
+                    resultModel.getDataVector().elementAt(i);
+
+            
+            curRow = sheet.createRow(i);    // row 생성
+            curRow.createCell(0).setCellValue((String)vt.get(0));    // row에 각 cell 저장
+            curRow.createCell(1).setCellValue((String)vt.get(1));
+            curRow.createCell(2).setCellValue((String)vt.get(2));
+            curRow.createCell(3).setCellValue((String)vt.get(3));    
+            curRow.createCell(4).setCellValue((String)vt.get(4));
+            curRow.createCell(5).setCellValue((String)vt.get(5));
+            curRow.createCell(6).setCellValue((String)vt.get(6));  
+        }
+        
+        workbook.write(fos);
+        fos.close(); 
+       Desktop.getDesktop().open(new File("member.xlsx"));
+        } catch (Exception e) {
+        
+        }
+        
+    }//GEN-LAST:event_jPrintBtnActionPerformed
+
+    private void jSaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSaveBtnActionPerformed
+        this.jTableTbl.getSelectionModel().clearSelection();
+       
+        this.jAccountTxt.setText("");
+        this.jName.setText("");
+        this.jPasswordTxt.setText("");
+    }//GEN-LAST:event_jSaveBtnActionPerformed
     DefaultTableModel resultModel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JTextField jAccountTxt;
     private javax.swing.JRadioButton jFeMale;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JRadioButton jMale;
     private javax.swing.JRadioButton jMarried;
     private javax.swing.JTextField jMno;
     private javax.swing.JTextField jName;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jPasswordTxt;
     private javax.swing.JButton jPrintBtn;
+    private javax.swing.JButton jSaveBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jSelectBtn;
     private javax.swing.JTable jTableTbl;
-    private javax.swing.JComboBox<String> jTeamPnb;
+    private javax.swing.JComboBox jTeamPnb;
     private javax.swing.JRadioButton jUnMarried;
     private javax.swing.JButton jUpdateBtn;
     // End of variables declaration//GEN-END:variables
@@ -324,8 +493,15 @@ public class NewMemberFrm extends javax.swing.JInternalFrame {
     private void initScreen() {
         resultModel = ((DefaultTableModel)jTableTbl.getModel());
         TableColumnModel columnModel = jTableTbl.getColumnModel();
-        columnModel.getColumn(3).setMinWidth(0);
-        columnModel.getColumn(3).setMaxWidth(0);
-        columnModel.getColumn(3).setPreferredWidth(0);
+        columnModel.getColumn(0).setMinWidth(0);
+        columnModel.getColumn(0).setMaxWidth(0);
+        columnModel.getColumn(0).setPreferredWidth(0);
+        
+        columnModel.getColumn(2).setMinWidth(0);
+        columnModel.getColumn(2).setMaxWidth(0);
+        columnModel.getColumn(2).setPreferredWidth(0);
+        
+        String sql = "select id, code, name from depart";
+        _instance.executeQueries(sql, jTeamPnb, 2);
     }
 }
